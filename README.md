@@ -1,6 +1,11 @@
 # Development Machine Automated Setup
 
-# Ubuntu
+## Pre-requirements
+
+- git
+
+### Ubuntu
+
 Setup Ubuntu
 ```
 mkdir personal
@@ -8,8 +13,8 @@ cd personal
 curl https://raw.githubusercontent.com/PcKiLl3r/setup_main_dev/main/ubuntu_setup.sh | sh
 ```
 
-# Fedora
---
+### Fedora
+
 Setup Fedora
 ```
 mkdir personal
