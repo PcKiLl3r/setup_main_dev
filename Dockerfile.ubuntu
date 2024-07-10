@@ -1,0 +1,7 @@
+FROM ubuntu:latest
+
+COPY ubuntu_setup.sh /ubuntu_setup.sh
+
+RUN chmod +x /setup.sh
+
+CMD ["/ubuntu_setup.sh"]
