@@ -2,7 +2,7 @@
 
 ## Pre-requirements
 
-- git
+- curl
 
 ### Setup Ubuntu
 
