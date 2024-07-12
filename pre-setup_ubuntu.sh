@@ -16,4 +16,4 @@ add-apt-repository --yes --update ppa:ansible/ansible
 apt install -y ansible git
 
 # Clone the repository
-git clone https://github.com/PcKiLl3r/setup_main_dev "$1"
+git clone https://github.com/PcKiLl3r/setup_main_dev .

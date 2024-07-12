@@ -11,7 +11,10 @@ RUN echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections && \
 # Install curl for downloading the setup script
 RUN apt-get update && apt-get install -y curl
 
-RUN mkdir /personal && cd /personal && curl https://raw.githubusercontent.com/PcKiLl3r/setup_main_dev/main/pre-setup_ubuntu.sh | bash
+RUN mkdir -p /personal && \
+    cd /personal && \
+    curl -sSL https://raw.githubusercontent.com/PcKiLl3r/setup_main_dev/main/pre-setup_ubuntu.sh -o pre-setup_ubuntu.sh && \
+    bash -x pre-setup_ubuntu.sh
 
 # Keep the container running for interactive testing
 CMD ["sleep", "infinity"]
