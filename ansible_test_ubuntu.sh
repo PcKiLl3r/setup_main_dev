@@ -7,7 +7,7 @@ docker buildx build --tag ubuntu-setup-ansible --file Dockerfile.ubuntu_with_dep
 docker run -d --name ubuntu-test-container ubuntu-setup-ansible
 
 # Simulate the steps to setup a new machine inside the container
-# docker exec -it ubuntu-test-container bash -c "mkdir /personal && cd /personal && curl https://raw.githubusercontent.com/PcKiLl3r/setup_main_dev/main/ubuntu_setup.sh | bash /dev/stdin /personal/setup_main_dev"
+docker exec -it ubuntu-test-container bash -c "setup_ubuntu.sh"
 
 # Optional: Attach to the container for interactive debugging
 # docker exec -it ubuntu-test-container bash
