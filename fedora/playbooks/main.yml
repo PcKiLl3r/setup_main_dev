@@ -1,26 +1,22 @@
-#- name: Include vars.yml into the 'vars' variable (2.2).
-#  ansible.builtin.include_vars:
-#    file: vars.yaml
-#    name: vars
-
-#- name: Include hosts for all further tasks
-#  include: hosts.yaml
-
 - name: Set up development environment
   hosts: localhost
-  become: yes
+#  become: yes
 
   tasks:
+    - name: Include main vars
+      ansible.builtin.include_vars:
+        file: vars.yml
+
     - name: Update apt package list
-      apt:
+      dnf:
         update_cache: yes
 
     - name: Upgrade all apt packages
-      apt:
+      dnf:
         upgrade: dist
 
     - name: Install common packages
-      apt:
+      dnf:
         name: "{{ item }}"
         state: present
       loop:
@@ -52,7 +48,7 @@
 
     - name: Install Node.js and npm
       shell: curl -sL https://deb.nodesource.com/setup_14.x | bash -
-    - apt:
+    - dnf:
         name: nodejs
         state: present
 
