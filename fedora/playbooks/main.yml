@@ -3,11 +3,11 @@
 #    file: vars.yaml
 #    name: vars
 
-- name: Include hosts for all further tasks
-  include: otherplays.yaml
+#- name: Include hosts for all further tasks
+#  include: hosts.yaml
 
 - name: Set up development environment
-#  hosts: localhost
+  hosts: localhost
   become: yes
 
   tasks:
