@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# Run Ansible playbook or any other setup tasks
-ls
+cd home
 
-# Clone the repository
-git clone https://github.com/PcKiLl3r/setup_main_dev ./private
+mkdir private
 
-cd private/setup_main_dev/fedora
+cd private
 
-ls
+git clone https://github.com/PcKiLl3r/setup_main_dev ./setup_main_dev
+
+cd setup_main_dev
+
+cd fedora
 
 ansible-playbook ./playbooks/main.yml

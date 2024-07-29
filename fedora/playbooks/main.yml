@@ -1,10 +1,13 @@
-- name: Include vars.yml into the 'vars' variable (2.2).
-  ansible.builtin.include_vars:
-    file: vars.yaml
-    name: vars
+#- name: Include vars.yml into the 'vars' variable (2.2).
+#  ansible.builtin.include_vars:
+#    file: vars.yaml
+#    name: vars
+
+- name: Include hosts for all further tasks
+  include: otherplays.yaml
 
 - name: Set up development environment
-  hosts: localhost
+#  hosts: localhost
   become: yes
 
   tasks:

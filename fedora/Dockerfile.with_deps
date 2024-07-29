@@ -9,9 +9,7 @@ RUN dnf install -y ansible git
 
 RUN mkdir ~/private
 
-WORKDIR /home
-
-RUN ls
+#WORKDIR /home
 
 # Keep the container running for interactive testing
 CMD ["sleep", "infinity"]
