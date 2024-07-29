@@ -1,4 +1,8 @@
----
+- name: Include vars.yml into the 'vars' variable (2.2).
+  ansible.builtin.include_vars:
+    file: vars.yaml
+    name: vars
+
 - name: Set up development environment
   hosts: localhost
   become: yes

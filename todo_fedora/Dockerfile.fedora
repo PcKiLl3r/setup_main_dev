@@ -1,7 +1,0 @@
-FROM fedora:latest
-
-COPY fedora_setup.sh /fedora_setup.sh
-
-RUN chmod +x /setup-fedora.sh
-
-CMD ["/fedora_setup.sh"]

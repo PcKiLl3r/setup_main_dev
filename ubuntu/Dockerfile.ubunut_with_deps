@@ -11,10 +11,20 @@ RUN echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections && \
 # Install curl for downloading the setup script
 RUN apt-get update && apt-get install -y curl
 
-RUN mkdir -p /personal && \
-    cd /personal && \
-    curl -sSL https://raw.githubusercontent.com/PcKiLl3r/setup_main_dev/main/pre-setup_ubuntu.sh -o pre-setup_ubuntu.sh && \
-    bash -x pre-setup_ubuntu.sh
+RUN export DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install necessary packages
+RUN apt update -y
+RUN apt install -y software-properties-common
+RUN add-apt-repository --yes --update ppa:ansible/ansible
+RUN apt install -y ansible git
+
+RUN mkdir private
+
+# Clone the repository
+RUN git clone https://github.com/PcKiLl3r/setup_main_dev ./private
+
+COPY playbooks playbooks
 
 # Keep the container running for interactive testing
 CMD ["sleep", "infinity"]

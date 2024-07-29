@@ -2,4 +2,4 @@
 
 # Run Ansible playbook or any other setup tasks
 cd "$1"
-ansible-playbook playbooks/main.yml
+ansible-playbook ./playbooks/main.yml
