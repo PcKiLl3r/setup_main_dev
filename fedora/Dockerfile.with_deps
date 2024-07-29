@@ -1,0 +1,18 @@
+# Dockerfile for development testing
+FROM fedora:40
+
+# Install curl for downloading the setup script
+RUN dnf update -y
+
+# Update package list and install necessary packages
+RUN dnf install -y ansible git
+
+RUN mkdir /private
+
+# Clone the repository
+RUN git clone https://github.com/PcKiLl3r/setup_main_dev ./private
+
+WORKDIR /private/setup_main_dev/fedora
+
+# Keep the container running for interactive testing
+CMD ["sleep", "infinity"]

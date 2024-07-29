@@ -1,0 +1,77 @@
+- name: Include vars.yml into the 'vars' variable (2.2).
+  ansible.builtin.include_vars:
+    file: vars.yaml
+    name: vars
+
+- name: Set up development environment
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all apt packages
+      apt:
+        upgrade: dist
+
+    - name: Install common packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - build-essential
+        - curl
+        - wget
+        - git
+        - vim
+        - zsh
+        - tmux
+        - htop
+        - fzf
+        - neovim
+        - python3
+        - python3-pip
+        - docker.io
+        - docker-compose
+
+    - name: Install Oh My Zsh
+      shell: |
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        creates: /home/{{ ansible_user }}/.oh-my-zsh
+
+    - name: Set zsh as default shell
+      user:
+        name: "{{ ansible_user }}"
+        shell: /usr/bin/zsh
+
+    - name: Install Node.js and npm
+      shell: curl -sL https://deb.nodesource.com/setup_14.x | bash -
+    - apt:
+        name: nodejs
+        state: present
+
+    - name: Install global npm packages
+      npm:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - typescript
+        - yarn
+
+    - name: Clone and install personal dotfiles
+      git:
+        repo: https://github.com/PcKiLl3r/dotfiles
+        dest: /home/{{ ansible_user }}/dotfiles
+      become: no
+      become_user: "{{ ansible_user }}"
+
+    - name: Install dotfiles
+      shell: ./install.sh
+      args:
+        chdir: /home/{{ ansible_user }}/dotfiles
+      become: no
+      become_user: "{{ ansible_user }}"
+
