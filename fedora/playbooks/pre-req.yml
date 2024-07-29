@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+
+    - name: Update dnf package list
+      dnf:
+        update_cache: yes
+
+    - name: Upgrade dnf packages
+      dnf:
+        upgrade: dist

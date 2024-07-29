@@ -1,4 +1,4 @@
-- name: Set up development environment
+- name: Set up environment on development machine
   hosts: localhost
 #  become: yes
 
@@ -7,13 +7,16 @@
       ansible.builtin.include_vars:
         file: vars.yml
 
-    - name: Update apt package list
-      dnf:
-        update_cache: yes
+    - name: Include pre-req playbook
+      ansible.builtin.import_playbook: otherplays.yaml
 
-    - name: Upgrade all apt packages
-      dnf:
-        upgrade: dist
+#    - name: Update apt package list
+      #      dnf:
+#        update_cache: yes
+
+    #    - name: Upgrade all apt packages
+      #      dnf:
+#        upgrade: dist
 
     - name: Install common packages
       dnf:
