@@ -7,8 +7,8 @@
       ansible.builtin.include_vars:
         file: vars.yml
 
-    - name: Include pre-req playbook
-      ansible.builtin.import_playbook: pre-req.yaml
+- name: Include pre-req playbook
+  ansible.builtin.import_playbook: pre-req.yaml
 
 #    - name: Update apt package list
       #      dnf:
@@ -17,63 +17,4 @@
     #    - name: Upgrade all apt packages
       #      dnf:
 #        upgrade: dist
-
-    - name: Install common packages
-      dnf:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - build-essential
-        - curl
-        - wget
-        - git
-        - vim
-        - zsh
-        - tmux
-        - htop
-        - fzf
-        - neovim
-        - python3
-        - python3-pip
-        - docker.io
-        - docker-compose
-
-    - name: Install Oh My Zsh
-      shell: |
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      args:
-        creates: /home/{{ ansible_user }}/.oh-my-zsh
-
-    - name: Set zsh as default shell
-      user:
-        name: "{{ ansible_user }}"
-        shell: /usr/bin/zsh
-
-    - name: Install Node.js and npm
-      shell: curl -sL https://deb.nodesource.com/setup_14.x | bash -
-    - dnf:
-        name: nodejs
-        state: present
-
-    - name: Install global npm packages
-      npm:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - typescript
-        - yarn
-
-    - name: Clone and install personal dotfiles
-      git:
-        repo: https://github.com/PcKiLl3r/dotfiles
-        dest: /home/{{ ansible_user }}/dotfiles
-      become: no
-      become_user: "{{ ansible_user }}"
-
-    - name: Install dotfiles
-      shell: ./install.sh
-      args:
-        chdir: /home/{{ ansible_user }}/dotfiles
-      become: no
-      become_user: "{{ ansible_user }}"
 
