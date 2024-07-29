@@ -1,6 +1,8 @@
-- hosts: localhost
-  tasks:
+- name: Set up environment on development machine
+  hosts: localhost
+#  become: yes
 
+  tasks:
     - name: Update dnf package list
       dnf:
         update_cache: yes
