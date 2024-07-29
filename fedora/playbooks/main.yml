@@ -8,7 +8,7 @@
         file: vars.yml
 
     - name: Include pre-req playbook
-      ansible.builtin.import_playbook: otherplays.yaml
+      ansible.builtin.import_playbook: pre-req.yaml
 
 #    - name: Update apt package list
       #      dnf:
