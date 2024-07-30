@@ -9,4 +9,5 @@
 
     - name: Upgrade dnf packages
       dnf:
-        upgrade: dist
+        name: "*"  # Applies the operation to all packages
+        state: latest
